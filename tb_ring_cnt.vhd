@@ -204,6 +204,142 @@ begin
             report "ERROR: Counter did not wrap back to LED 0."
             severity error;
 
+		----------------------------------------------------------------
+        -- assert reset
+        ----------------------------------------------------------------
+        tb_rst <= '0';
+
+		----------------------------------------------------------------
+        -- LED 0
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000000001";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 0 pattern incorrect."
+            severity error;
+
+        report "PASS: LED pattern = " & vec2str(tb_cnt)
+            severity note;
+
+        ----------------------------------------------------------------
+        -- LED 1
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000000010";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 1 pattern incorrect." -- it supposed to not print when leds show correct pattern 
+            severity error;
+
+        report "PASS: LED pattern = " & vec2str(tb_cnt)
+            severity note;
+
+        ----------------------------------------------------------------
+        -- LED 2
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000000100";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 2 pattern incorrect."
+            severity error;
+
+		----------------------------------------------------------------
+        -- Release reset
+        ----------------------------------------------------------------
+        tb_rst <= '1';
+		wait for CLK_PERIOD * 4;
+        ----------------------------------------------------------------
+        -- LED 3
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000001000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 3 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- LED 4
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000010000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 4 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- LED 5
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000100000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 5 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- LED 6
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0001000000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 6 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- LED 7
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0010000000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 7 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- LED 8
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0100000000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 8 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- LED 9
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "1000000000";
+
+        assert tb_cnt = expected
+            report "ERROR: LED 9 pattern incorrect."
+            severity error;
+
+        ----------------------------------------------------------------
+        -- Check wrap-around back to LED 0
+        ----------------------------------------------------------------
+        wait until rising_edge(tb_clk);
+
+        expected := "0000000001";
+
+        assert tb_cnt = expected
+            report "ERROR: Counter did not wrap back to LED 0."
+            severity error;
         ----------------------------------------------------------------
         -- Simulation finished
         ----------------------------------------------------------------
